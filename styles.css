@@ -29,7 +29,7 @@ body {
 
 /*Section start menu contaier*/
 .menu_continer {
-    visibility: hidden;
+    /*visibility: hidden;*/
 }
 /*Section end menu container*/
 

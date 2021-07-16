@@ -1,15 +1,15 @@
 {
 	"folders": [
 		{
-			"name": "assets",
-			"path": "../../../Downloads/pomodoro-app/starter-code/assets"
-		},
-		{
 			"name": "7-15-pomodora",
 			"path": "."
+		},
+		{
+			"name": "assets",
+			"path": "../../../Downloads/pomodoro-app/starter-code/assets"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "assets"
+		"liveServer.settings.multiRootWorkspaceName": "7-15-pomodora"
 	}
 }
