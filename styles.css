@@ -1,0 +1,11 @@
+:root {
+    --background_color: rgp(30, 33, 63);
+    --white_font: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    margin-block-end: 0;
+    margin-block-start: 0;
+}
