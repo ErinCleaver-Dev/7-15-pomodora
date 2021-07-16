@@ -1,6 +1,6 @@
 /*Effects the whole website*/
 :root {
-    --background_color: rgp(30, 33, 63);
+    --background_color: rgb(30, 33, 63);
     --white_font: #FFFFFF;
 }
 
@@ -19,17 +19,101 @@ body {
 }
 
 /*End Elements that effect the whole website*/
-/*Section start body*/
-
-/*Section end body*/
-
+/* Start Main section */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 /*Section start timer container*/
+.timer_continer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 450px;
+}
+
+.pomodoro {
+    height: 1.6em;
+    padding: 30px;
+}
+
+.button_container {
+    background: #161932;
+    border-radius: 25px;
+    padding: 5px;
+    transition: 25s;
+}
+
+button.formated_button {
+    border: none;
+    background: none;
+    padding: 10px;
+    color: #D7E0FF;
+}
+
+button.formated_button:focus {
+    background-color: #F87070;
+    border: none;
+    border-radius: 25px;
+    color: black;
+}
+
+.circle_container {
+    height: 40vh;
+    width: 40vh;
+    margin: 40px;
+    border-radius: 50%;
+    background: linear-gradient(315deg, #2E325A 0%, #0E112A 100%);
+    box-shadow: -50px -50px 100px #272C5A, 50px 50px 100px #121530;
+    position: relative;
+}
+
+div#text-timer {
+    text-align: center;
+    margin-top: 45%;
+}
+.circle {
+    position: absolute;
+    z-index: 1;
+}
+
+h2#timer {
+    font-weight: 700;
+    font-size: 2.7em;
+    padding-bottom: 15px;
+}
+
+
 
 /*Section end timer container*/
 
+/*end main section*/
 /*Section start menu contaier*/
+
 .menu_continer {
-    /*visibility: hidden;*/
+    position: absolute;
+    visibility: flex;
+    top: 25%;
+    flex-direction: column;
+    background-color: white;
+    color: black;
+    z-index: 2;
+    padding: 30px 0;
+    border-radius: 25px;
+    margin: 20px;
+    max-width: 450px;
+}
+
+.menu_continer h1, h3, div {
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
+.menu_continer h1 {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #E3E1E1;
 }
 /*Section end menu container*/
 

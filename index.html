@@ -8,40 +8,55 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=Roboto+Slab:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
   <title>Frontend Mentor | Pomodoro app</title>
+
 </head>
 <body>
   <main>
     <section class="timer_continer">
-      <img src="./assets/logo.svg">
-      <div>
-        <button type="button" class="formated_button">pomodoro</button>
+      <img class="pomodoro" src="./assets/logo.svg">
+      <div class="button_container">
+        <button type="button" class="formated_button" autofocus>pomodoro</button>
         <button type="button" class="formated_button">short break</button>
         <button type="button" class="formated_button">long break</button>
       </div>
       <div class="circle_container">
-        start
+        <svg class="circle" viewBox="0 0 100 100">
+          <circle class="part_1" cx="50" cy="50" r="45" stroke="#F87070" stroke-width="2" fill="none" />
+        </svg>
+        <div id="text-timer">
+          <h2 id="timer">25:00</h2>
+          <a id="start">start</a>
+        </div>
       </div>
+      <img src="./assets/icon-settings.svg">
     </section>
    
  
   <section class="menu_continer">
     <h1>Settings</h1>
-    <h3>Time (minutes)</h3>
     <form>
+    <h3>Time (minutes)</h3>
     <div class="time_settings">
-      <label>
-      pomodoro
-      </label>
-    <input type="number" id="pomodoro"/>
-    <label>
-      short break
-    </label>
-    <input type="number" id="short_breake"/>
-      <label>
+      <div>
+        <label>
+        pomodoro
+        </label>
+        <input type="number" id="pomodoro"/>
+      </div>
+      <div>
+        <label>
+          short break
+        </label>
+        <input type="number" id="short_breake"/>
+      </div>
+      <div>
+        <label>
         long break
-      </label>
-      <input type="number" id="long break/">
+        </label>
+        <input type="number" id="long break/">
+      </div>
     </div>
     <div class="font_settings">
       <h3>Font</h3>    
