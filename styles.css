@@ -248,7 +248,18 @@ h2#timer {
     height: 30px;
 }
 
-
+button#apply {
+    background-color: #D881F8;
+    border: none;
+    width: 100px;
+    padding: 5px;
+    border-radius: 25px;
+    font-size: 1.2em;
+    color: white;
+    position:absolute;
+    bottom: -16px;
+    left: 35%;
+}
 
 /*Section end menu container*/
 
