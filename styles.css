@@ -111,10 +111,143 @@ h2#timer {
 
 }
 
+.menu_continer h3 {
+    text-align: center;
+    padding: 10px;
+    font-size: .7em;
+    text-transform: uppercase;
+}
+
+.time_settings label {
+    display: inline-block;
+    width: 90px;
+    padding-right: 90px;
+    font-size: .6em;
+    color: #757886;
+}
+
+.time_settings input {
+    width: 100px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #EFF1FA;
+    color: #1E213F;
+}
+
 .menu_continer h1 {
     padding-bottom: 20px;
     border-bottom: 1px solid #E3E1E1;
 }
+
+.time_settings div {
+    padding: 2px;
+}
+
+.font_settings div {
+    display: flex;
+    justify-content: center;
+    
+}
+
+
+.font_settings input[type=radio]{
+    border: none;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    appearance:unset;
+    border: 1px solid black;
+    border-radius: 25px;
+    position: relative;
+    margin: 0 5px;
+    font-size: 1em;
+}
+
+.font_settings input[type=radio]::before {
+    content: "Aa";
+    position: absolute;
+    top: 18%;
+    left: 15%;
+}
+
+.font_settings input[type=radio]:checked{
+    
+    color: white; 
+    background-color: black; 
+    width: 30px;
+    height: 30px;
+}
+
+.color_settings div {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.color_settings input[type=radio]{
+    border: none;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    appearance:unset;
+    border: 1px solid black;
+    border-radius: 25px;
+    position: relative;
+    margin: 0 5px;
+    font-size: 1em;
+}
+
+.color_settings input[type=radio]{
+    border: none;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    appearance:unset;
+    border: 1px solid black;
+    border-radius: 25px;
+    position: relative;
+    margin: 0 5px;
+    font-size: 1em;
+}
+
+.color_settings input[type=radio]{
+    border: none;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    appearance:unset;
+    border-radius: 25px;
+    position: relative;
+    margin: 0 5px;
+    font-size: 1em;
+}
+
+.color_settings input[type=radio]#pink_button{
+    background-color: #F87070;
+}
+.color_settings input[type=radio]#blue_button{
+    background-color: #70F3F8;
+}
+.color_settings input[type=radio]#purple_button{
+    background-color: #D881F8;
+}
+
+
+
+.color_settings input[type=radio]:checked::before {
+    content: "\2714";
+    position: absolute;
+    top: 20%;
+    left: 27%;
+}
+
+.color_settings input[type=radio]:checked{
+    
+    color: white; 
+    width: 30px;
+    height: 30px;
+}
+
 /*Section end menu container*/
 
 /*Section start tablet*/
