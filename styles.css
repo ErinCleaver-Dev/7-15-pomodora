@@ -47,6 +47,7 @@ main {
 
 button.formated_button {
     border: none;
+    font-weight: bold;
     background: none;
     padding: 10px;
     color: #D7E0FF;
@@ -70,15 +71,19 @@ button.formated_button:focus {
 }
 
 div#text-timer {
+    position: relative;
+    z-index: 2;
     text-align: center;
     margin-top: 45%;
 }
 .circle {
     position: absolute;
     z-index: 1;
+    width: 95%;
 }
 
 h2#timer {
+    position: relative;
     font-weight: 700;
     font-size: 2.7em;
     padding-bottom: 15px;
@@ -93,7 +98,7 @@ h2#timer {
 
 .menu_continer {
     position: absolute;
-    visibility: flex;
+    visibility: hidden;
     top: 25%;
     flex-direction: column;
     background-color: white;
