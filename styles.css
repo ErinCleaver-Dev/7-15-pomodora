@@ -89,7 +89,9 @@ h2#timer {
     padding-bottom: 15px;
 }
 
-
+#settings_button {
+    cursor: pointer;
+}
 
 /*Section end timer container*/
 
