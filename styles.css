@@ -136,11 +136,19 @@ h2#timer {
 
 .menu_continer h1 {
     padding-bottom: 20px;
-    border-bottom: 1px solid #E3E1E1;
+    border-bottom: 2px solid #E3E1E1;
 }
 
 .time_settings div {
     padding: 2px;
+}
+.time_settings {
+    border-bottom: 2px solid #E3E1E1;
+    padding-bottom: 20px;
+}
+
+.font_settings {
+    border-bottom: 2px solid #E3E1E1;
 }
 
 .font_settings div {
@@ -248,6 +256,10 @@ h2#timer {
     height: 30px;
 }
 
+.color_settings {
+    padding-bottom: 30px;
+}
+
 button#apply {
     background-color: #D881F8;
     border: none;
@@ -265,7 +277,50 @@ button#apply {
 
 /*Section start tablet*/
 
+
+@media only screen and (min-width: 768px) {
+    section.menu_continer {
+        min-width: 540px;
+        max-width: none;
+    }
+
+    .menu_continer h3 {
+        text-align: left;
+        padding-top: 20px;
+    }
+
+    .time_settings label {
+        width: unset;
+        padding-right: 0px;
+    }
+
+    .time_settings {
+        display: flex;
+        justify-content: center;
+    }
+
+    .time_settings div {
+        
+        padding-right: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    .font_settings { 
+        padding-bottom: 20px;
+    }
+
+    .font_settings, .color_settings {
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+    }
+
+    button#apply { 
+        left: 40%;
+    }
+}
+
 /*Section end tablet*/
 
-/*Section start Desktop*/
-/*Section end Desktop*/
+
