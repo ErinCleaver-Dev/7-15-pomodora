@@ -100,7 +100,7 @@ h2#timer {
 
 .menu_continer {
     position: absolute;
-    visibility: hidden;
+    display: none;
     top: 25%;
     flex-direction: column;
     background-color: white;
