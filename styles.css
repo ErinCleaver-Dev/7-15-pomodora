@@ -33,6 +33,10 @@ main {
     max-width: 450px;
 }
 
+#start, #stop, #restart {
+    cursor: pointer;
+}
+
 .pomodoro {
     height: 1.6em;
     padding: 30px;
@@ -43,6 +47,7 @@ main {
     border-radius: 25px;
     padding: 5px;
     transition: 25s;
+    position: relative;
 }
 
 button.formated_button {
@@ -51,13 +56,21 @@ button.formated_button {
     background: none;
     padding: 10px;
     color: #D7E0FF;
+    z-index: 2;
+    position: relative;
 }
 
-button.formated_button:focus {
-    background-color: #F87070;
-    border: none;
-    border-radius: 25px;
-    color: black;
+#indicator {
+    transition: all 0.5s ease-in;
+    background: #f87070;
+    width: calc(70%/3);
+    height: 35px;
+    position: absolute;
+    top: 4px;
+    z-index: 1;
+    border-radius: 20px;
+    padding: 0 10px;
+    margin-left: calc(0%);
 }
 
 .circle_container {
