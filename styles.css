@@ -12,6 +12,17 @@
     outline: none;
 }
 
+#overlay {
+    background-color: rgb(20, 21, 31);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    position: fixed;
+    display: block;
+    opacity: .9;
+    top: 0;
+    left: 0;
+}
 body {
     background-color: var(--background_color);
     color: var(--white_font);
@@ -192,6 +203,8 @@ h2#timer {
     position: relative;
     margin: 0 5px;
     font-size: 1em;
+    cursor: pointer;
+    z-index: 2;
 }
 
 .font_settings input[type=radio]::before {
@@ -226,19 +239,8 @@ h2#timer {
     position: relative;
     margin: 0 5px;
     font-size: 1em;
-}
-
-.color_settings input[type=radio]{
-    border: none;
-    width: 30px;
-    height: 30px;
-    background-color: white;
-    appearance:unset;
-    border: 1px solid black;
-    border-radius: 25px;
-    position: relative;
-    margin: 0 5px;
-    font-size: 1em;
+    cursor: pointer;
+    z-index: 2;
 }
 
 .color_settings input[type=radio]{
@@ -346,4 +348,60 @@ button#apply {
 
 /*Section end tablet*/
 
+
+.wrapper {
+    position: absolute;
+    top: 20%;
+    left: 45%;
+    margin: auto 0; 
+    z-index: 2;
+    width: 250px;
+    color: black;
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 25px;
+}
+
+img.img-cookies {
+    height: 100px;
+    position: absolute;
+    left: 35%;
+    top: -17%;
+}
+
+div#notice-cookies {
+    display: flex;
+    flex-direction: column;
+}
+
+h3.title-cookie {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-size: 1.8em;
+    font-weight: 400;
+}
+
+p.paragraph {
+    padding-bottom: 25px;
+}
+
+button#btn-accept-cookies {
+    background-color: #828282;
+    border: none;
+    padding: 10px;
+    font-size: 1.4em;
+    color: white;
+    font-weight: 700;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+
+a.link {
+    text-decoration: none;
+    color: #a7c8ff;
+    font-size: 0.95em;
+    cursor: pointer;
+}
 
