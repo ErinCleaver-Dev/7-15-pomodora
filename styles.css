@@ -82,6 +82,9 @@ button.formated_button {
     box-shadow: -50px -50px 100px #272C5A, 50px 50px 100px #121530;
     position: relative;
 }
+circle#timer_circle {
+    transition: stroke-dashoffest 2s ease-out 0s;
+}
 
 div#text-timer {
     position: relative;

@@ -1,9 +1,19 @@
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
 
 class Settings {
     constructor() {
         this.menu_continer = document.querySelector(".menu_continer");
         this.pomodoro = 25;
-        this.short_breake = 5;
+        this.short_breake = 1;
         this.long_break = 15;
         this.setTimer(this.pomodoro, this.short_breake, this.long_break);
     }
@@ -31,6 +41,8 @@ class Settings {
         })
     }
 
+    
+
     setTimer(pomodoro, short_breake, long_break) {
         this.pomodoro = pomodoro;
         this.short_breake = short_breake;
@@ -51,35 +63,57 @@ class Timer {
         this.short_breake = settings.short_breake;
         this.long_break = settings.long_break;
         this.start = document.getElementById('start');
-        this.dashoffset = 1000;
+        this.setTime = document.getElementById('timer');
+        this.selectedMode = this.pomodoro;
+        this.mintues = 0;
+        this.totalSecounds;
+        this.secounds;
+        this.currentSecounds = 0;
+        this.dashoffset = 1024;
+        this.offset;
+        this.timerCircle = document.getElementById('timer_circle');
+        
     }
 
-    loadButtons() {
-        this.pomodoroButton();
-        this.shortBreakeButton();
-        this.longBreakButton();
+    
+
+    loadButtons(settings) {
+        this.pomodoroButton(settings);
+        this.shortBreakeButton(settings);
+        this.longBreakButton(settings);
     }
 
-    pomodoroButton() {
+    pomodoroButton(settings) {
         let pomodoro = document.getElementById("pomodoro_button");
         pomodoro.addEventListener("click", (ev) => {
             ev.preventDefault();
+            this.currentTime(settings.pomodoro, "00");
+            
+            this.selectedMode = settings.pomodoro;
             this.buttonSilder('0%');
         })
     }
 
-    shortBreakeButton() {
-        let pomodoro = document.getElementById("short_breake_button");
-        pomodoro.addEventListener("click", (ev) => {
+    currentTime(mintues, secounds) {
+        this.setTime.innerText = mintues + ":" + secounds;
+    }
+
+    shortBreakeButton(settings) {
+        let short_breake = document.getElementById("short_breake_button");
+        short_breake.addEventListener("click", (ev) => {
+            this.currentTime(settings.short_breake, "00");
+            this.selectedMode = settings.short_breake;
             ev.preventDefault();
             this.buttonSilder('33%');
         })
     }
 
     longBreakButton() {
-        let pomodoro = document.getElementById("long_break_button");
-        pomodoro.addEventListener("click", (ev) => {
+        let long_break = document.getElementById("long_break_button");
+        long_break.addEventListener("click", (ev) => {
             ev.preventDefault();
+            this.currentTime(settings.long_break, "00");
+            this.selectedMode = settings.long_break;
             this.buttonSilder('66%');
         })
     }
@@ -89,10 +123,26 @@ class Timer {
         indicator.style.marginLeft = `calc(${percentage})`
     }
 
+
     timer() {
+            if(getCookie("lastOffset")) {
+                console.log("indside test cookies")
+                this.selectedMode = getCookie("selectedMode");
+                this.dashoffset = parseInt(getCookie("lastOffset"));
+                console.log(this.dashoffset);
+                this.currentSecounds = parseInt(getCookie("lastTime"));
+                this.mintues = Math.floor(this.currentSecounds/60);
+                this.secounds = this.currentSecounds%60;
+                this.currentTime(this.getTimeString(this.mintues), this.getTimeString(this.secounds));
+                this.timerCircle.setAttribute("stroke-dashoffset", this.dashoffset);
+                document.cookie = "lastOffset=; expires 19 Jun 2021 00:00:00 UTC";
+
+            } 
 
         document.addEventListener("click", (ev) => {
             ev.preventDefault();
+            console.log(`Outside test: ${document.cookie.indexOf("lastOffset")}`)
+
             if(ev.target && ev.target.id == 'start') {
                 ev.target.id = "stop";
                 ev.target.innerText = "stop";
@@ -106,45 +156,100 @@ class Timer {
             } else if (ev.target && ev.target.id == 'restart') {
                 ev.target.id = "start";
                 ev.target.innerText = "start"
-                this.dashoffset = 1000;
+                this.reset();
             }
 
         })
     }
 
-    startTimer() {
-        let timerCircle = document.getElementById('timer_circle');
-        const timer = setInterval(() => {
-            this.dashoffset--;
+    reset () {
+        this.dashoffset = 1024;
+        this.currentSecounds = 0;
+        this.currentTime(this.selectedMode, "00");
+        this.timerCircle.style.strokeDashoffset = this.dashoffset;
+    }
 
-            if(this.dashoffset == 0) {
+  
+    startTimer() {
+        if(this.dashoffset == 1024) {
+          this.totalSecounds  = (this.selectedMode *  60);
+          this.currentSecounds = this.totalSecounds;
+        }  
+    
+        console.log("Checking for nan:" + this.dashoffset);
+
+        
+        this.timerCircle.setAttribute("stroke-dashoffset", this.dashoffset)
+
+        const timer = setInterval(() => {
+            this.currentSecounds--;
+            if(this.currentSecounds == 0) {
+                this.currentTime("00", "00");
                 this.restartTimer();
-            }
-            timerCircle.style.strokeDashoffset = this.dashoffset;
+                clearInterval(timer);
+            }        
+            
+            this.mintues = Math.floor(this.currentSecounds/60);
+            this.secounds = this.currentSecounds%60;
+
+            
+            let precent =((this.currentSecounds%this.totalSecounds)/this.totalSecounds)*100;
+
+            console.log("Dashoffset: " + Math.ceil((precent/100) * 1024));
+            this.dashoffset = Math.ceil((precent/100) * 1024);
+            
+            console.log(this.currentSecounds)
+            this.timerCircle.setAttribute("stroke-dashoffset", this.dashoffset);
+            console.log("time circle: " + this.timerCircle.style.strokeDashoffset)
+
+
+            this.currentTime(this.getTimeString(this.mintues), this.getTimeString(this.secounds));
+            document.cookie = "lastOffset="+this.dashoffset;
+            document.cookie = "lastTime="+this.currentSecounds;
+
             console.log(this.dashoffset)
-            if(this.dashoffset < 1 || this.getStopTimmer()) {
+            if(this.getStopTimmer()) {
                 clearInterval(timer);
                 this.stopTimer = false;
             }  
+
         }, 1000);
+    }
+
+    getTimeString(timeIntervalue) {
+        if(timeIntervalue > 9) {
+            return timeIntervalue;
+        } else if(timeIntervalue <= 9) {
+            return "0" + timeIntervalue;
+        } else if(timeIntervalue == 0) {
+            return "00"
+        } 
     }
 
     getStopTimmer() {
         return this.stopTimer;
     }
     restartTimer() {
+        console.log("Testing reset")
         let restart = document.getElementById('stop');      
         restart.id = 'restart'
         restart.innerText = 'restart'
+    }
+    getCookie() {
+
     }
 
 }
 
 
+
+
 settings = new Settings();
+
+
 
 settings.accessSettings();
 settings.applyChanges();
 timer = new Timer(settings);
-timer.loadButtons();
+timer.loadButtons(settings);
 timer.timer();
