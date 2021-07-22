@@ -12,7 +12,7 @@ function getCookie(name) {
 function setCookie(name, value) {
     const date = new Date();
     date.setFullYear(date.getFullYear() +1);
-    document.cookie = `${name}=${value} expires="${date.toGMTString()}"`;
+    document.cookie = `${name}=${value}; expires=${date.toGMTString()}`;
 }
 
 let btnAcceptCookies = document.getElementById('btn-accept-cookies');
@@ -47,7 +47,7 @@ if(checkCookie != -1) {
 
 
 
-
+// Settings Class begins 
 class Settings {
     constructor() {
         this.menu_continer = document.querySelector(".menu_continer");
@@ -55,57 +55,163 @@ class Settings {
         this.pomodoro = 25;
         this.short_breake = 1;
         this.long_break = 15;
+        this.settingsCockies()
         this.setTimer(this.pomodoro, this.short_breake, this.long_break);
     }
-    
-    clickOverlay() {
-        this.overlay.addEventListener('click', (ev)=>{
 
-            this.overlay.style.display = 'none';
-            this.menu_continer.style.display = 'none';
-           
-        })
+    settingsCockies(){
+        if(getCookie("settings_pomodoro")) {
+            this.pomodoro = getCookie("settings_pomodoro");
+            this.short_breake = getCookie("settings_short_breake");
+            this.long_break = getCookie("settings_long_break");
+        }
+
+        
+
+        if(getCookie("selected_font") == "large") {
+            this.setFont("1.8em", "1em", "3em", "40px", "1em")
+        } else if(getCookie("selected_font")== "medium") {
+            this.setFont("1.6em", ".9em", "2.7em", "40px", ".9em")
+
+        } else if(getCookie("selected_font")== "small") {
+            this.setFont("1.4em", ".7em", "2.5em", "37px", ".7em")
+        }
+
+        if(getCookie("selected_color") == "pink_button") {
+            this.setColor("#F87070");
+        } else if(getCookie("selected_color") == "blue_button") {
+            this.setColor("#70F3F8", "#757988")
+        } else if(getCookie("selected_color") == "purple_button"){
+            this.setColor("#D881F8")
+        }
+      
     }
-    
 
     accessSettings () {
         let settings_button = document.getElementById("settings_button");
         settings_button.addEventListener("click", (ev) => {
             ev.preventDefault();
             this.menu_continer.style.display = 'flex';
-            this.overlay.style.display = 'block';
         }) 
     }
 
     applyChanges () {
         let apply = document.getElementById("apply");
+        this.selectFontRadioOption();
+        this.selectColorRadioOption();
+
         apply.addEventListener("click", (ev) => {
-            ev.preventDefault();
             this.pomodoro = document.getElementById("pomodoro").value;
             this.short_breake = document.getElementById("short_breake").value;
             this.long_break = document.getElementById("long_break").value;
             console.log(this.pomodoro)
             this.setTimer(this.pomodoro, this.short_breake, this.long_break);
             this.menu_continer.style.display = 'none';
-            this.overlay.style.display = 'none';
         })
     }
 
+
+    selectFontRadioOption() {
+        let fontSettings = document.querySelector(".font_settings");
+        let large = document.getElementById("large");
+        let small = document.getElementById("small");
+        let medium = document.getElementById("medium");
+
+        fontSettings.addEventListener("click", (ev) => {
+            if(ev.target && ev.target.id == "large") {
+                
+                this.setFont("1.8em", "1em", "3em", "40px", "1em")
+
+                setCookie("selected_font", 'large');
+                large.checked = true;
+                medium.checked = false;
+                small.checked = false;             
+            } else if(ev.target && ev.target.id == "medium") {
+                console.log("Testing medium click event")
+
+                this.setFont("1.6em", ".9em", "2.7em", "40px", ".9em")
+                setCookie("selected_font", 'medium');
+
+                large.checked = false;
+                medium.checked = true;
+                small.checked = false;
+            } else if(ev.target && ev.target.id == "small") {
+                console.log("Testing small click event")
+                this.setFont("1.4em", ".7em", "2.5em", "37px", ".7em")
+                setCookie("selected_font", 'small');
+                large.checked = false;
+                medium.checked = false;
+                small.checked = true;
+            }
+        })
+    }
+
+    setFont(pomodoroFont, buttonFont, timerFount, indicatorFount, timerButtonFount) {
+        document.querySelector(".pomodoro").style.height = pomodoroFont;
+        document.querySelector(".button_container").style.fontSize =buttonFont
+        document.querySelector("#timer").style.fontSize = timerFount
+        document.querySelector("#indicator").style.height = indicatorFount;
+        document.querySelector(".timer_button").style.fontSize =timerButtonFount
+    }
     
+
+    selectColorRadioOption() {
+        let color_settings = document.querySelector(".color_settings");
+        let pinkButton = document.getElementById("pink_button");
+        let blueButton = document.getElementById("blue_button");
+        let purpleButton = document.getElementById("purple_button");
+
+        color_settings.addEventListener("click", (ev) => {
+            if(ev.target && ev.target.id == "pink_button") {
+                
+            
+                setCookie("selected_color", 'pink_button');
+                this.setColor("#F87070")
+
+                pinkButton.checked = true;
+                blueButton.checked = false;
+                purpleButton.checked = false;             
+            } else if(ev.target && ev.target.id == "blue_button") {
+                console.log("Testing medium click event")
+                setCookie("selected_color", 'blue_button');
+                this.setColor("#70F3F8")
+
+                pinkButton.checked = false;
+                blueButton.checked = true;
+                purpleButton.checked = false;
+            } else if(ev.target && ev.target.id == "purple_button") {
+                setCookie("selected_color", 'purple_button');
+                this.setColor("#D881F8")
+                pinkButton.checked = false;
+                blueButton.checked = false;
+                purpleButton.checked = true;
+            }
+        })
+
+    }
+
+    setColor(color) {
+        document.getElementById("indicator").style.background = color;
+        document.getElementById("timer_circle").style.stroke = color;
+    }
 
     setTimer(pomodoro, short_breake, long_break) {
         this.pomodoro = pomodoro;
         this.short_breake = short_breake;
         this.long_break = long_break;
-        this.stoppedTimer = false;
-        this.restartTimer = false;
-        document.getElementById("pomodoro").value = pomodoro;
-        document.getElementById("short_breake").value = short_breake;
-        console.log(document.getElementById("long_break"))
-        document.getElementById("long_break").value = long_break;
+        setCookie("settings_pomodoro", this.pomodoro)
+        setCookie("settings_short_breake", this.short_breake)
+        setCookie("settings_long_break", this.long_break)
+
+        document.getElementById("pomodoro").value = this.pomodoro;
+        document.getElementById("short_breake").value = this.short_breake;
+        document.getElementById("long_break").value = this.long_break;
+
     }
 
 }
+
+// setting class ends 
 
 class Timer {
     constructor(settings) {
@@ -136,11 +242,11 @@ class Timer {
         this.pomodoroButton(settings);
         this.shortBreakeButton(settings);
         this.longBreakButton(settings);
-        if(getCookie("buttonSelected")[0] == 0) {
+        if(getCookie("buttonSelected") == 0) {
             this.pomodoro_button.click();
-        } else if(getCookie("buttonSelected")[0] == 1) {
+        } else if(getCookie("buttonSelected")== 1) {
             this.short_breake_button.click();
-        } else if(getCookie("buttonSelected")[0] == 2) {
+        } else if(getCookie("buttonSelected")== 2) {
             this.long_break_button.click();
         }
         
@@ -162,8 +268,8 @@ class Timer {
     }
 
     shortBreakeButton(settings) {
-        this.short_breake_button= document.getElementById("short_breake_button");
-        this.short_breake_button.addEventListener("click", (ev) => {
+            this.short_breake_button= document.getElementById("short_breake_button");
+            this.short_breake_button.addEventListener("click", (ev) => {
             this.currentTime(settings.short_breake, "00");
             setCookie("buttonSelected", 1);
             this.selectedMode = settings.short_breake;
@@ -210,7 +316,6 @@ class Timer {
 
         document.addEventListener("click", (ev) => {
             ev.preventDefault();
-            console.log(`Outside test: ${document.cookie.indexOf("lastOffset")}`)
 
             if(ev.target && ev.target.id == 'start') {
                 ev.target.id = "stop";
@@ -313,12 +418,9 @@ class Timer {
 
 
 settings = new Settings();
-
-
-
 settings.accessSettings();
 settings.applyChanges();
-settings.clickOverlay();
+
 timer = new Timer(settings);
 timer.loadButtons(settings);
 timer.timer();

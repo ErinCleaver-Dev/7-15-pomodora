@@ -29,7 +29,7 @@
         </svg>
         <div id="text-timer">
           <h2 id="timer">25:00</h2>
-          <a id="start">start</a>
+          <a id="start" class="timer_button">start</a>
         </div>
       </div>
       <img id="settings_button" src="./assets/icon-settings.svg">
@@ -38,10 +38,10 @@
  
   <section class="menu_continer">
     <h1>Settings</h1>
-    <form>
+    <form action="./" method="post">
     <h3>Time (minutes)</h3>
     <div class="time_settings">
-      <div>
+      <div action="./" method="post" >
         <label>
         pomodoro
         </label>
@@ -65,13 +65,13 @@
       <h3>Font</h3>    
       <div>
         <label>
-          <input type="radio" class="radio_formated" name="font_options"/>
+          <input type="radio" class="radio_formated" id="large" checked name="font_options"/>
         </label>
         <label>
-          <input type="radio" class="radio_formated" name="font_options"/>
+          <input type="radio" class="radio_formated" id="medium" name="font_options"/>
         </label>
         <label>
-          <input type="radio" class="radio_formated" name="font_options"/>
+          <input type="radio" class="radio_formated" id="small" name="font_options"/>
         </label>
       </div>
     </div>
@@ -79,7 +79,7 @@
       <h3>Color</h3>
       <div>
         <label>
-          <input type="radio" class="radio_formated" id="pink_button" name="color_options"/>
+          <input type="radio" class="radio_formated" id="pink_button" checked name="color_options"/>
         </label>
         <label>
           <input type="radio" class="radio_formated" id="blue_button" name="color_options"/>
