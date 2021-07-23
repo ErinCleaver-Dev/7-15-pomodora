@@ -101,6 +101,7 @@ class Settings {
         this.selectColorRadioOption();
 
         apply.addEventListener("click", (ev) => {
+            ev.preventDefault();
             this.pomodoro = document.getElementById("pomodoro").value;
             this.short_breake = document.getElementById("short_breake").value;
             this.long_break = document.getElementById("long_break").value;
@@ -254,7 +255,6 @@ class Timer {
 
     pomodoroButton(settings) {
         pomodoro_button.addEventListener("click", (ev) => {
-            ev.preventDefault();
             this.currentTime(settings.pomodoro, "00");
             setCookie("buttonSelected", 0);
             this.selectedMode = settings.pomodoro;
@@ -274,7 +274,6 @@ class Timer {
             setCookie("buttonSelected", 1);
             this.selectedMode = settings.short_breake;
             this.dashoffset = 1024;
-            ev.preventDefault();
             this.buttonSilder('33%');
         })
     }
@@ -282,7 +281,6 @@ class Timer {
     longBreakButton() {
         
         this.long_break_button.addEventListener("click", (ev) => {
-            ev.preventDefault();
             setCookie("buttonSelected", 2);
             this.currentTime(settings.long_break, "00");
             this.selectedMode = settings.long_break;
@@ -300,7 +298,6 @@ class Timer {
 
     timer() {
             if(getCookie("lastOffset")) {
-                console.log("indside test cookies")
                 this.selectedMode = getCookie("selectedMode");
                 this.dashoffset = parseInt(getCookie("lastOffset"));
                 console.log(this.dashoffset);
@@ -312,10 +309,7 @@ class Timer {
                 this.timerCircle.setAttribute("stroke-dashoffset", this.dashoffset);
             } 
 
-            
-
         document.addEventListener("click", (ev) => {
-            ev.preventDefault();
 
             if(ev.target && ev.target.id == 'start') {
                 ev.target.id = "stop";
@@ -345,8 +339,8 @@ class Timer {
 
   
     startTimer() {
-        if(this.dashoffset == 1024) {
           this.totalSecounds  = (this.selectedMode *  60);
+        if(this.dashoffset == 1024) {
           this.currentSecounds = this.totalSecounds;
         }  
     
